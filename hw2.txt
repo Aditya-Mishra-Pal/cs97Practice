@@ -1,0 +1,55 @@
+My Write Up for CS131 HW 2
+Name: Aditya Mishra
+UID: 405411117
+Date: 1/28/2021
+
+I originally spent a very long time trying to write make_parser in terms of 
+make_matcher but in the end, I couldn't get that to work so my answer instead
+is "sort-of".
+
+I thought of the parser as a more specific version of the make_matcher
+but I couldn't get a way to actually use make_matcher in my function,
+(which is what I think the goal was).
+
+Instead, I based my make_parser off the design of make_matcher.
+
+I used inspiration from make_matcher because the goal was to do the same
+thing but to keep track of the tree at the same time. I was going to do This
+by passing a variable that kept track of where I went at each step but
+ that didn't work. What I essentially did instead was to use a variable that
+ prepends all the associated syntaxes and and combines them into a list
+ of "visited rules". I used my alternate helper function "extra_parser"
+ to help determine if I had visited a terminal or nonterminal node
+ (depending on this piece of info, you would add or not add it to the list).
+ Using this, I put all associated rules into a list of traverse rules.
+ 
+ A difference between the two is that the oarser and make_matcher
+ both take in acceptors however the parser's acceptor stays the same
+ and if an empty suffix. This is the only acceptor that works for the
+ parser because the only way to pass a non-empty suffix is if the 
+ fragment isn't fully parsed. 
+
+I chose to do make_matcher first because from the way I saw it, 
+make_parser was the exact same thing, you just had to keep track of 
+the syntax as you were going through it. So, I tried to use all of make_matcher
+within make_parser without code duplication to no avail. I was ulitimately 
+unable to form a solution that used make_matcher inside of make_parser which
+ is a shortcoming of my project because some code is duplicated. I think 
+ that given more time I could have found a way to utilize the function the 
+ way we were intended to use them.
+
+ Additionally, some edge cases of my project are for convert_grammar.
+ As per question @66 on PIAZZA, there are edge cases for converting to hw2 
+ style grammar that is difficult to account for. For instance, if we had a 
+ grammar with a grammar that had an expression that was passed into the rules
+ I would get an error (despite being a valid convertible language).
+
+ Additionally, it is possible for my code to get stuck in an infinite loop.
+ (similar to paragraph above). If my grammar has a nonterminal symbol that
+ calls itself as a rule in the grammar list. If this is the case, my code
+ will enter an infinite loop and due to the recursive nature of the problem
+ the stack will overflow and the program will be corrupted. 
+
+
+
+
